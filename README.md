@@ -1,4 +1,4 @@
-# bitcoin-burn-balance
+# Bitcoin Burn Balance
 This repository maintains the total amount of bitcoins that have been 'burnt'. 
 Bitcoins sent to genesis block payout address, and certain address strings that
 is believed to have no private key associated with it are considered burnt as nobody
