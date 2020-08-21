@@ -1,17 +1,27 @@
 # Bitcoin Burn Balance
 This repository maintains the total amount of bitcoins that have been 'burnt'. 
-Bitcoins sent to genesis block payout address, and certain address strings that
+Bitcoin sent to genesis block payout address, and certain address strings that
 is believed to have no private key associated with it are considered burnt as nobody
 can spend those bitcoins. These addresses are valid Bitcoin addresses, that is they meet
 the mathematical requirements of the address just that they have been created without
 someone owning the private key associated with it.
 
 **Technical description:**
-For example, the address '1BitcoinEaterAddressDontSendf59kuE' ends with f59kuE. That isn't 
-just random gibberish the first person to send to that address made up.  All or part of that
-is the checksum (mathematical verification that the address is valid). The checksum is what 
-prevents you from making something up completely, and it exists primarily to prevent accidental
-spends to typo addresses (it isn't technically required, but because it exists, it is extremely
-unlikely that you can type an address wrong and send coins). The address also must only contain 
-valid characters as defined by base-58 encoding, which prevents that particular address from 
-being all caps (uppercase o and i are not allowed in base-58).
+Many bitcoins have been lost in the past either due to human error, or some protocol issues
+which were fixed later. For example, due to an early problem in Bitcoin, fixed by BIP30, it 
+was possible to create a coinbase transaction identical to a previous coinbase. This caused 
+the coins created by that older coinbase to be irreversibly "overwritten". This happened in 
+block 91842 (overwriting the coinbase of block 91812) and 91880 (overwriting the coinbase of 
+block 91722). Each time, 50 BTC was lost.
+
+There were cases where miners have claimed less BTC from the block subsidy than what could
+have been claimed. For example, between block 162705 and block 169899, 193 blocks claimed 
+less than allowed due to a bug, resulting in a total loss of 9.66184623 BTC.
+
+Moreover, there are certain addresses where sending BTC to them is considered to be burnt.
+For example, consider the address '1BitcoinEaterAddressDontSendf59kuE'. This address is 
+perfectly valid but the odds of someone owning the private key to this address is absolutely
+minimal. Finding the private key associated will mean brute forcing Bitcoin's entire private 
+key space. The list of such addresses is associated in the "burn_address.txt" file.
+
+
